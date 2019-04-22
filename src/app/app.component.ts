@@ -96,4 +96,8 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
+  get numberOfDeletedQuizzes() {
+    return this.quizzes.filter(x => x.markedForDelete).length;
+  }
 }

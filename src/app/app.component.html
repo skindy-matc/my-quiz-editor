@@ -24,13 +24,12 @@
           [class.active]="q == selectedQuiz"
           href="#"
           *ngFor="let q of quizzes" 
-          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+          [style.text-decoration]="q.markedForDelete ? 'line-through' : 'inherit'">
           {{ q.name }}
-          <span 
-            class="badge badge-secondary"
-            [class.bg-danger]="q.questions.length == 0">
+          <small>
             {{ q.questions.length }} {{ q.questions.length == 1 ? 'question' : 'questions' }}
-          </span>
+          </small>
         </a>
       </div>
     </div>
@@ -42,7 +41,14 @@
       </div>
     </div>
     <div class="col-md-8 mt-4" *ngIf="selectedQuiz">
-      <button class="btn btn-outline-success">Save</button>
+      <button class="btn btn-outline-success">
+        Save
+        <span 
+          class="ml-1 badge badge-danger"
+          *ngIf="numberOfDeletedQuizzes > 0">
+          - {{ numberOfDeletedQuizzes }}
+        </span>
+      </button>
       <button
         (click)="deselectQuiz()" 
         class="btn btn-link">
