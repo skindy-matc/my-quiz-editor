@@ -110,8 +110,10 @@ export class AppComponent implements OnInit {
   get numberOfEditedQuizzes() {
     return this.quizzes
       .filter(x => 
-        x.name !== x.originalName || 
-        x.questionsChecksum != x.questions.map(q => q.name).join('~')
+        !x.markedForDelete && (
+          x.name !== x.originalName || 
+          x.questionsChecksum != x.questions.map(q => q.name).join('~')
+        )
       ).length;
   }
 }
