@@ -3,8 +3,10 @@ import { QuizService } from './quiz.service';
 
 interface QuizDisplay {
   name: string;
+  originalName: string;
   description: string;
   questions: QuestionDisplay[];
+  questionsChecksum: string;
   markedForDelete: boolean;
 }
 
@@ -40,8 +42,10 @@ export class AppComponent implements OnInit {
     // create new quiz
     const newQuiz: QuizDisplay = {
       name: "Untitled Quiz",
+      originalName: "Untitled Quiz",
       description: "Untitled Description",
       questions: [],
+      questionsChecksum: "",
       markedForDelete: false
     };
     
@@ -84,8 +88,10 @@ export class AppComponent implements OnInit {
       (data) => {
         this.quizzes = (<any[]> data).map(x => ({
           name: x.name,
+          originalName: x.name,
           description: "Grabbed from REST API endpoint",
           questions: x.questions,
+          questionsChecksum: x.questions.map(q => q.name).join('~'),
           markedForDelete: false
         }));
         console.log(this.quizzes);
@@ -99,5 +105,13 @@ export class AppComponent implements OnInit {
 
   get numberOfDeletedQuizzes() {
     return this.quizzes.filter(x => x.markedForDelete).length;
+  }
+
+  get numberOfEditedQuizzes() {
+    return this.quizzes
+      .filter(x => 
+        x.name !== x.originalName || 
+        x.questionsChecksum != x.questions.map(q => q.name).join('~')
+      ).length;
   }
 }

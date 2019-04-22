@@ -48,6 +48,9 @@
           *ngIf="numberOfDeletedQuizzes > 0">
           - {{ numberOfDeletedQuizzes }}
         </span>
+        <span class="ml-1 badge badge-light" *ngIf="numberOfEditedQuizzes > 0">
+          ∗ {{ numberOfEditedQuizzes }}
+        </span>
       </button>
       <button
         (click)="deselectQuiz()" 
