@@ -48,11 +48,13 @@
         class="btn btn-link">
         Cancel
       </button>
-      <button 
-        (click)="deleteQuiz(selectedQuiz)"
-        class="btn btn-outline-danger float-right">
-        Delete This Quiz
-      </button>
+      <label class="form-check-label text-danger float-right">
+        <input 
+          type="checkbox" 
+          class="form-check-input"
+          [(ngModel)]="selectedQuiz.markedForDelete">
+          Mark for Delete
+      </label>
       <div class="mt-4">
         <ngb-accordion activeIds="static-1">
           <ngb-panel id="static-1" title="Name">

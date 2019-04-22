@@ -5,6 +5,7 @@ interface QuizDisplay {
   name: string;
   description: string;
   questions: QuestionDisplay[];
+  markedForDelete: boolean;
 }
 
 interface QuestionDisplay {
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit {
     const newQuiz: QuizDisplay = {
       name: "Untitled Quiz",
       description: "Untitled Description",
-      questions: []
+      questions: [],
+      markedForDelete: false
     };
     
     // create new list of quizzes with the new quiz
@@ -83,7 +85,8 @@ export class AppComponent implements OnInit {
         this.quizzes = (<any[]> data).map(x => ({
           name: x.name,
           description: "Grabbed from REST API endpoint",
-          questions: x.questions
+          questions: x.questions,
+          markedForDelete: false
         }));
         console.log(this.quizzes);
       },
