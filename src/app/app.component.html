@@ -43,6 +43,9 @@
     <div class="col-md-8 mt-4" *ngIf="selectedQuiz">
       <button class="btn btn-outline-success">
         Save
+        <span class="ml-1 badge badge-success" *ngIf="numberOfAddedQuizzes > 0">
+          + {{ numberOfAddedQuizzes }}
+        </span>
         <span 
           class="ml-1 badge badge-danger"
           *ngIf="numberOfDeletedQuizzes > 0">
