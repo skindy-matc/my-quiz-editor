@@ -106,7 +106,10 @@ export class AppComponent implements OnInit {
       originalName: x.originalName,
       questions: x.questions
     }));
-    const newQuizzes = [];
+    const newQuizzes = this.getAddedQuizzes().map(x => ({
+      quizName: x.name,
+      quizQuestions: x.questions.map(item => item.name)
+    }));
 
     this.qSvc.saveQuizzes(editedQuizzes, newQuizzes).subscribe(
       numberOfChangedQuizzesSaved => console.log(numberOfChangedQuizzesSaved),
@@ -136,8 +139,10 @@ export class AppComponent implements OnInit {
   }
 
   get numberOfAddedQuizzes() {
-    return this.quizzes.filter(x => 
-      !x.markedForDelete && x.originalName === "Untitled Quiz"
-    ).length;
+    return this.getAddedQuizzes().length;
+  }
+
+  private getAddedQuizzes() {
+    return this.quizzes.filter(x => !x.markedForDelete && x.originalName === "Untitled Quiz");
   }
 }
