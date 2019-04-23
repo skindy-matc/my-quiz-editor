@@ -33,10 +33,6 @@ export class AppComponent implements OnInit {
     this.selectedQuiz = q;
   }
 
-  deselectQuiz = () => {
-    this.selectedQuiz = undefined;
-  }
-
   addNewQuiz = () => {
 
     // create new quiz
@@ -84,23 +80,29 @@ export class AppComponent implements OnInit {
   // so use ngOnInit instead
   ngOnInit() {
     // rename numberQuestions property to numberOfQuestions 
-    this.qSvc.getQuizzes().subscribe(
-      (data) => {
-        this.quizzes = (<any[]> data).map(x => ({
-          name: x.name,
-          originalName: x.name,
-          description: "Grabbed from REST API endpoint",
-          questions: x.questions,
-          questionsChecksum: x.questions.map(q => q.name).join('~'),
-          markedForDelete: false
-        }));
-        console.log(this.quizzes);
-      },
-      (error) => {
-        console.log(error);
-        this.serviceDown = true;
-      }
-    );
+    this.loadAllQuizzes();
+  }
+
+  private loadAllQuizzes() {
+    this.qSvc.getQuizzes().subscribe((data) => {
+      this.quizzes = (<any[]>data).map(x => ({
+        name: x.name,
+        originalName: x.name,
+        description: "Grabbed from REST API endpoint",
+        questions: x.questions,
+        questionsChecksum: x.questions.map(q => q.name).join('~'),
+        markedForDelete: false
+      }));
+      console.log(this.quizzes);
+    }, (error) => {
+      console.log(error);
+      this.serviceDown = true;
+    });
+  }
+
+  cancelBatchEdits = () => {
+    this.loadAllQuizzes();
+    this.selectQuiz(undefined);
   }
 
   get numberOfDeletedQuizzes() {
