@@ -15,7 +15,7 @@
     <div class="col-md-4 mt-4">
       <button 
         (click)="addNewQuiz()"
-        class="btn btn-outline-primary">
+        class="btn btn-outline-success">
         Add New Quiz
       </button>
       <div class="list-group mt-4">
@@ -43,11 +43,10 @@
     <div class="col-md-8 mt-4" *ngIf="selectedQuiz">
       <button 
         (click)="saveBatchEdits()"
-        class="btn btn-outline-success">
-        Save
-        <span class="ml-1 badge badge-success" *ngIf="numberOfAddedQuizzes > 0">
-          + {{ numberOfAddedQuizzes }}
-        </span>
+        class="btn"
+        [class.btn-outline-dark]='numberOfDeletedQuizzes + numberOfEditedQuizzes + numberOfAddedQuizzes === 0'
+        [class.btn-dark]='numberOfDeletedQuizzes + numberOfEditedQuizzes + numberOfAddedQuizzes > 0'>
+        Save Quizzes
         <span 
           class="ml-1 badge badge-danger"
           *ngIf="numberOfDeletedQuizzes > 0">
@@ -55,6 +54,9 @@
         </span>
         <span class="ml-1 badge badge-light" *ngIf="numberOfEditedQuizzes > 0">
           ∗ {{ numberOfEditedQuizzes }}
+        </span>
+        <span class="ml-1 badge badge-success" *ngIf="numberOfAddedQuizzes > 0">
+          + {{ numberOfAddedQuizzes }}
         </span>
       </button>
       <button
@@ -100,7 +102,7 @@
         <div class="card-body">
           <button 
             (click)="addNewQuestion()"
-            class="btn btn-outline-primary mb-4">
+            class="btn btn-outline-success mb-4">
             Add New Question
           </button>
           <div class="input-group mb-3" *ngFor="let q of selectedQuiz.questions">
