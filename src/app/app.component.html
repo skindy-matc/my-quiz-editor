@@ -40,7 +40,11 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8 mt-4" *ngIf="selectedQuiz">
+    <div 
+      class="col-md-8 mt-4" 
+      *ngIf="selectedQuiz" 
+      [@detailsFromLeft]="detailsAnimationState"
+      (@detailsFromLeft.done)="detailsFromLeftAnimationComplete()">
       <button 
         (click)="saveBatchEdits()"
         class="btn"
