@@ -37,8 +37,8 @@ interface QuestionDisplay {
         ]))
       ]),
     ]),
-    trigger('pulseSaveCancelButtons', [
-      transition('nothingToSave => somethingToSave', [
+    trigger('pulse', [
+      transition('done => doPulse', [
         animate('400ms', keyframes([
           style({ transform: 'scale(1.0)', 'transform-origin': 'top left', offset: 0.0 }),
           style({ transform: 'scale(1.2)', 'transform-origin': 'top left', offset: 0.5 }),
