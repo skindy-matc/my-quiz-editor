@@ -14,7 +14,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-`ng build --prod --base-href "https://skindy-matc.github.io/quiz-editor/" --output-path docs`
+`ng build --prod --base-href "https://skindy-matc.github.io/my-quiz-editor/" --output-path docs`
 
 * **base-href** is the base url where the project will be hosted
 *  **output-path** is the dir to which the prod files will be output
